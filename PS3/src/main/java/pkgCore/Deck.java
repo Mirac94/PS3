@@ -12,6 +12,7 @@ public class Deck {
 	private ArrayList<Card> cardsInDeck;
 
 	public Deck() {
+		//erase this later
 		for (eSuit eSuit : eSuit.values()) {
 			for (eRank eRank : eRank.values()) {
 				cardsInDeck.add(new Card(eSuit, eRank));
