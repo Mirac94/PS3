@@ -5,6 +5,7 @@ import java.util.Collections;
 
 import pkgEnum.eRank;
 import pkgEnum.eSuit;
+import pkgException.DeckException;
 
 public class Deck {
 
@@ -18,20 +19,42 @@ public class Deck {
 		}
 		Collections.shuffle(cardsInDeck);
 	}
-
-	//TODO: Fix the Draw method so it throws an exception if the deck is empty
-	public Card Draw() {
+	
+	public Card Draw() throws DeckException {
+		if (cardsInDeck.size() == 0) {
+			throw new DeckException(this);
+		}
 		return cardsInDeck.remove(0);
+}
+	public Card Draw(eSuit eSuit) {
+		for (Card c : this.cardsInDeck) {
+			if (c.geteSuit() == eSuit) {
+				cardsInDeck.remove(c);
+				return c;
+			}
+		}
+		return null;
 	}
-	
-	//TODO: Write an overloaded Draw method to Draw a card of a given eSuit
-	
-	//TODO: Write an overloaded Draw method to Draw a card of a given eRank
+	public Card Draw(eRank eRank) {
+		for (Card c : this.cardsInDeck) {
+			if (c.geteRank() == eRank) {
+				cardsInDeck.remove(c);
+				return c;
+			}
+		}
+		return null;
+	}
 
 	//TODO: Write a method that will return the number of a given eSuit left in the deck.
+	public int CardCount(eSuit eSuit)
 	
 	//TODO: Write a method that will return the number of a given eRank left in the deck.
 	
-	//TODO: Write a method that will return 0 or 1 if a given card is left in the deck.
-	
+	public int FindCard(Card c) {
+		for (Card crds : cardsInDeck) {
+			if (crds == c)
+				return 1;
+		}
+		return 0;
+	}
 }
